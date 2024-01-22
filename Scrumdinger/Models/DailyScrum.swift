@@ -12,6 +12,14 @@ struct DailyScrum: Identifiable {
     var title: String
     var attendees: [Attendee]
     var lengthInminutes: Int
+    var lengthInMinutesAsDouble: Double {
+        get {
+            Double(lengthInminutes)
+        }
+        set {
+            lengthInminutes = Int(newValue)
+        }
+    }
     var theme: Theme
     
     init(id: UUID = UUID(), title: String, attendees: [String], lengthInminutes: Int, theme: Theme) {
@@ -33,7 +41,12 @@ extension DailyScrum {
             self.name = name
         }
     }
+    
+    static var emptyScrum: DailyScrum {
+        DailyScrum(title: "", attendees: [], lengthInminutes: 5, theme: .orange)
+    }
 }
+
 
 extension DailyScrum {
     static let sampleData: [DailyScrum] =
